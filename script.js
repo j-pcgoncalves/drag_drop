@@ -31,12 +31,7 @@ function getSavedColumns() {
     progressListArray = JSON.parse(localStorage.progressItems);
     completeListArray = JSON.parse(localStorage.completeItems);
     onHoldListArray = JSON.parse(localStorage.onHoldItems);
-  } else {
-    backlogListArray = ['Release the course', 'Sit back and relax'];
-    progressListArray = ['Work on projects', 'Listen to music'];
-    completeListArray = ['Being cool', 'Getting stuff done'];
-    onHoldListArray = ['Being uncool'];
-  }
+  };
 }
 
 // Set localStorage Arrays
@@ -144,22 +139,11 @@ function hideInputBox(column) {
 
 // Allows arrays to reflect Drag and Drop items
 function rebuildArrays() {
-  backlogListArray = [];
-  for (let i = 0; i < backlogListEl.children.length; i++) {
-    backlogListArray.push(backlogListEl.children[i].textContent);
-  }
-  progressListArray = [];
-  for (let i = 0; i < progressListEl.children.length; i++) {
-    progressListArray.push(progressListEl.children[i].textContent);
-  }
-  completeListArray = [];
-  for (let i = 0; i < completeListEl.children.length; i++) {
-    completeListArray.push(completeListEl.children[i].textContent);
-  }
-  onHoldListArray = [];
-  for (let i = 0; i < onHoldListEl.children.length; i++) {
-    onHoldListArray.push(onHoldListEl.children[i].textContent);
-  }
+  backlogListArray = Array.from(backlogListEl.children).map(i => i.textContent);
+  progressListArray = Array.from(progressListEl.children).map(i => i.textContent);
+  completeListArray = Array.from(completeListEl.children).map(i => i.textContent);
+  onHoldListArray = Array.from(onHoldListEl.children).map(i => i.textContent);
+
   updateDOM();
 }
 
