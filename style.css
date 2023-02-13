@@ -238,5 +238,6 @@ ul {
 
   .drag-column {
     margin: 10px;
+    -moz-user-select: none;
   }
 }
