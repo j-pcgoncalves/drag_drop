@@ -157,6 +157,7 @@ function dragEnter(column) {
 function drag(e) {
   draggedItem = e.target;
   dragging = true;
+  e.dataTransfer.setData('text', 'anything');  
 }
 
 // Column Allows for Item to Drop
