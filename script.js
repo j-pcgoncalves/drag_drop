@@ -31,7 +31,7 @@ function getSavedColumns() {
     progressListArray = JSON.parse(localStorage.progressItems);
     completeListArray = JSON.parse(localStorage.completeItems);
     onHoldListArray = JSON.parse(localStorage.onHoldItems);
-  }
+  } 
 }
 
 // Set localStorage Arrays
@@ -73,26 +73,26 @@ function updateDOM() {
     getSavedColumns();
   }
   // Backlog Column
-  backlogList.textContent = '';
-  backlogListArray.forEach((backlogItem, index) => createItemEl(backlogList, 0, backlogItem, index));
+  backlogListEl.textContent = '';
+  backlogListArray.forEach((backlogItem, index) => createItemEl(backlogListEl, 0, backlogItem, index));
 
   backlogListArray = filterArray(backlogListArray);
 
   // Progress Column
-  progressList.textContent = '';
-  progressListArray.forEach((progressItem, index) => createItemEl(progressList, 1, progressItem, index));
+  progressListEl.textContent = '';
+  progressListArray.forEach((progressItem, index) => createItemEl(progressListEl, 1, progressItem, index));
 
   progressListArray = filterArray(backlogListArray);
 
   // Complete Column
-  completeList.textContent = '';
-  completeListArray.forEach((completeItem, index) => createItemEl(completeList, 2, completeItem, index));
+  completeListEl.textContent = '';
+  completeListArray.forEach((completeItem, index) => createItemEl(completeListEl, 2, completeItem, index));
 
   completeListArray = filterArray(backlogListArray);
 
   // On Hold Column
-  onHoldList.textContent = '';
-  onHoldListArray.forEach((onHoldItem, index) => createItemEl(onHoldList, 3, onHoldItem, index));
+  onHoldListEl.textContent = '';
+  onHoldListArray.forEach((onHoldItem, index) => createItemEl(onHoldListEl, 3, onHoldItem, index));
 
   onHoldListArray = filterArray(backlogListArray);
 
@@ -104,13 +104,13 @@ function updateDOM() {
 // Update Item - Delete if necessary, or update Array value
 const updateItem = (id, column) => {
   const selectedArray = listArrays[column];
-  const selectedColumnEl = listColumns[column].children;
+  const selectedColumn = listColumns[column].children;
 
   if (!dragging) {
-    if (!selectedColumnEl[id].textContent) {
+    if (!selectedColumn[id].textContent) {
       delete selectedArray[id];
     } else {
-      selectedArray[id] = selectedColumnEl[id].textContent;
+      selectedArray[id] = selectedColumn[id].textContent;
     }
   
     updateDOM();
@@ -124,7 +124,7 @@ const addToColumn = column => {
 
   selectedArray.push(itemText);
   addItems[column].textContent = '';
-  updateDOM();
+  updateDOM(column);
 }
 
 // Show Add Item Input Box
@@ -148,26 +148,26 @@ const rebuildArrays = () => {
 
   backlogListArray = [];
 
-  for (let i = 0; i < backlogList.children.length; i++) {
-    backlogListArray.push(backlogList.children[i].textContent);
+  for (let i = 0; i < backlogListEl.children.length; i++) {
+    backlogListArray.push(backlogListEl.children[i].textContent);
   };
 
   progressListArray = [];
 
-  for (let i = 0; i < progressList.children.length; i++) {
-    progressListArray.push(progressList.children[i].textContent);
+  for (let i = 0; i < progressListEl.children.length; i++) {
+    progressListArray.push(progressListEl.children[i].textContent);
   };
 
   completeListArray = [];
 
-  for (let i = 0; i < completeList.children.length; i++) {
-    completeListArray.push(completeList.children[i].textContent);
+  for (let i = 0; i < completeListEl.children.length; i++) {
+    completeListArray.push(completeListEl.children[i].textContent);
   };
 
   onHoldListArray = [];
 
-  for (let i = 0; i < onHoldList.children.length; i++) {
-    onHoldListArray.push(onHoldList.children[i].textContent);
+  for (let i = 0; i < onHoldListEl.children.length; i++) {
+    onHoldListArray.push(onHoldListEl.children[i].textContent);
   };
 
   updateDOM();
